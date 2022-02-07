@@ -27,6 +27,7 @@ const Topbar = () => {
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO2vBQ1vOla9pPM6M0ZsYZb7OckCS21cgN_Q&usqp=CAU"
             className="topAvatar"
+            alt="pic"
           />
         </div>
       </div>
