@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Chart from "../../components/chart/Chart";
 import Info from "../../components/info/Info";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
@@ -19,6 +20,7 @@ const Home = () => {
         <WidgetSm />
         <WidgetLg />
       </div>
+      <Outlet />
     </div>
   );
 };
