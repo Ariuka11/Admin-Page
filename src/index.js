@@ -11,22 +11,34 @@ import User from "./pages/user/User";
 import ProductList from "./pages/productlist/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import { Provider } from "react-redux";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
+const admin =
+  JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+    .currentUser &&
+  JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
+    .isAdmin;
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<App />}>
-        <Route path="" element={<Home />} />
-        <Route path="users" element={<UserList />} />
-        <Route path="user/:id" element={<User />} />
-        <Route path="newUser" element={<NewUser />} />
-        <Route path="products" element={<ProductList />} />
-        <Route path="product/:id" element={<Product />} />
-        <Route path="newProduct" element={<NewProduct />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={admin && <App />}>
+            <Route path="" element={<Home />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="user/:id" element={<User />} />
+            <Route path="newUser" element={<NewUser />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="newProduct" element={<NewProduct />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>,
   document.getElementById("root")
 );
 
