@@ -1,11 +1,17 @@
 import { request, userRequest } from "../axios";
 import {
+  addProductFail,
+  addProductsStart,
+  addProductSuccess,
   deleteProductFail,
   deleteProductsStart,
   deleteProductSuccess,
   getProductFail,
   getProductsStart,
   getProductSuccess,
+  updateProductFail,
+  updateProductsStart,
+  updateProductSuccess,
 } from "./productRedux";
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 
@@ -32,9 +38,27 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductsStart());
   try {
-    const res = await userRequest.delete(`products/${id}`);
-    dispatch(deleteProductSuccess(res.data));
+    // const res = await userRequest.delete(`products/${id}`);
+    dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFail());
+  }
+};
+export const addProduct = async (product, dispatch) => {
+  dispatch(addProductsStart());
+  try {
+    const res = await userRequest.post(`products`, product);
+    dispatch(addProductSuccess(res.data));
+  } catch (err) {
+    dispatch(addProductFail());
+  }
+};
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductsStart());
+  try {
+    const res = await userRequest.post(`products${id}`, { product });
+    dispatch(updateProductSuccess(res.data));
+  } catch (err) {
+    dispatch(updateProductFail());
   }
 };

@@ -1,30 +1,81 @@
 import "./newProduct.css";
-
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../redux/apiCalls";
 export default function NewProduct() {
+  const [input, setInput] = useState({});
+  const [file, setFile] = useState(
+    "https://img.search.brave.com/aPTgrcbKWAKOJ6zJtDm87MQRLYW92A-d44dMoiJaLfM/rs:fit:474:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5C/VzU0V2MyWDZ6QmQ4/UHlLa1hnRHFnSGFI/YSZwaWQ9QXBp"
+  );
+  const [cat, setCat] = useState([]);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    setInput((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const product = { ...input, categories: cat, img: file };
+    addProduct(product, dispatch);
+  };
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Product</h1>
       <form className="addProductForm">
         <div className="addProductItem">
           <label>Image</label>
-          <input type="file" id="file" />
+          <input
+            type="file"
+            id="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
         </div>
         <div className="addProductItem">
-          <label>Name</label>
-          <input type="text" placeholder="Apple Airpods" />
+          <label>Title</label>
+          <input
+            name="title"
+            type="text"
+            placeholder="Apple Airpods"
+            onChange={handleChange}
+          />
         </div>
         <div className="addProductItem">
           <label>Stock</label>
-          <input type="text" placeholder="123" />
-        </div>
-        <div className="addProductItem">
-          <label>Active</label>
-          <select name="active" id="active">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+          <select name="inStock" id="" onChange={handleChange}>
+            <option value="true">True</option>
+            <option value="false">False</option>
           </select>
         </div>
-        <button className="addProductButton">Create</button>
+        <div className="addProductItem">
+          <label>Description</label>
+          <input
+            name="desc"
+            type="text"
+            placeholder="...description"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Price</label>
+          <input
+            name="price"
+            type="number"
+            placeholder="100$"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Categories</label>
+          <input type="text" placeholder="category" onChange={handleCat} />
+        </div>
+        <button onClick={handleClick} className="addProductButton">
+          Create
+        </button>
       </form>
     </div>
   );
