@@ -20,6 +20,7 @@ import { PersistGate } from "redux-persist/integration/react";
 //     .currentUser &&
 //   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).currentUser
 //     .isAdmin;
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
