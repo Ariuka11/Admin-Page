@@ -15,12 +15,14 @@ export default function NewProduct() {
     });
   };
   const handleCat = (e) => {
-    setCat(e.target.value.split(","));
+    setCat((prev) => {
+      return { ...prev, [e.target.name]: e.target.value.split(",") };
+    });
   };
-
+  console.log(cat);
   const handleClick = (e) => {
     e.preventDefault();
-    const product = { ...input, categories: cat, img: file };
+    const product = { ...input, ...cat, img: file };
     addProduct(product, dispatch);
   };
   return (
@@ -71,7 +73,30 @@ export default function NewProduct() {
         </div>
         <div className="addProductItem">
           <label>Categories</label>
-          <input type="text" placeholder="category" onChange={handleCat} />
+          <input
+            name="categories"
+            type="text"
+            placeholder="category"
+            onChange={handleCat}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Color</label>
+          <input
+            name="color"
+            type="text"
+            placeholder="color"
+            onChange={handleCat}
+          />
+        </div>
+        <div className="addProductItem">
+          <label>Size</label>
+          <input
+            name="size"
+            type="text"
+            placeholder="size"
+            onChange={handleCat}
+          />
         </div>
         <button onClick={handleClick} className="addProductButton">
           Create
