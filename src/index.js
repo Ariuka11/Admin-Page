@@ -24,17 +24,15 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          {admin && (
-            <Route path="/" element={<App />}>
-              <Route path="" element={<Home />} />
-              <Route path="users" element={<UserList />} />
-              <Route path="user/:id" element={<User />} />
-              <Route path="newUser" element={<NewUser />} />
-              <Route path="products" element={<ProductList />} />
-              <Route path="product/:id" element={<Product />} />
-              <Route path="newProduct" element={<NewProduct />} />
-            </Route>
-          )}
+          <Route path="/" element={<App />}>
+            <Route path="" element={<Home />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="user/:id" element={<User />} />
+            <Route path="newUser" element={<NewUser />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="product/:id" element={<Product />} />
+            <Route path="newProduct" element={<NewProduct />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </PersistGate>
