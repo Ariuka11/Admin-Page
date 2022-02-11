@@ -28,6 +28,12 @@ export default function Sidebar() {
                 Home
               </li>
             </Link>
+            <Link to="/login" className="link">
+              <li className="sidebarListItem active">
+                <LineStyle className="sidebarIcon" />
+                Login
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
