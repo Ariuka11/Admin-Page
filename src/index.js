@@ -26,7 +26,7 @@ ReactDOM.render(
           <Route path="/login" element={<Login />} />
           {admin && (
             <Route path="/*" element={<App />}>
-              <Route path="" element={<Home />} />
+              <Route index element={<Home />} />
               <Route path="users" element={<UserList />} />
               <Route path="user/:id" element={<User />} />
               <Route path="newUser" element={<NewUser />} />
